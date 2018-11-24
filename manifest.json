@@ -3,15 +3,15 @@
 	"name": "Automatic Input",
 	"version": "0.1",
 
-	"description": "fills input boxes automatically.",
+	"description": "Fills input boxes automatically.",
 
 	"applications": {
 		"gecko": {
-			"id": "autoinput@nagater.net"
+			"id": "autoinput@plugins.nagater.net"
 		}
 	},
 
-	"permissions": ["storage", "<all_urls>"],
+	"permissions": ["storage"],
 
 	"content_scripts": [
 		{
