@@ -1,27 +1,24 @@
 
 function saveOptions(e) {
 	console.log("saveOptions()");
-	console.log(document.getElementById("entries").value);
 	browser.storage.local.set({
-		entries: document.getElementById("entries").value
+		entries: document.getElementById("entries").value,
+		timeout: Number(document.getElementById("timeout").value)
 	});
 	e.preventDefault();
 }
 
 function restoreOptions() {
 	console.log("restoreOptions()");
-	function setCurrent(result) {
-		console.log("setCurrent(result)");
-		console.log(result);
-		console.log(result.entries);
-		document.getElementById("entries").value = result.entries || "";
-	}
 	function onError(error) {
 		console.log(`Error: ${error}`);
 	}
-	var getting = browser.storage.local.get("entries");
-	console.log(getting);
-	getting.then(setCurrent, onError);
+	browser.storage.local.get("entries").then(function(result) {
+		document.getElementById("entries").value = result.entries || "";
+	}, onError);
+	browser.storage.local.get("timeout").then(function(result) {
+		document.getElementById("timeout").value = result.timeout || 1000;
+	}, onError);
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);

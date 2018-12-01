@@ -54,4 +54,8 @@ function autoinput_doit() {
 	browser.storage.local.get("entries").then(gotEntries, onError);
 }
 
-autoinput_id = setInterval(autoinput_doit, 1000, 0);
+browser.storage.local.get("entries").then(function(result) {
+	autoinput_id = setInterval(autoinput_doit, result.timeout, 0);
+}, function(error) {
+	autoinput_id = setInterval(autoinput_doit, 1000, 0);
+});
